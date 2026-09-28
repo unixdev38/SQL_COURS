@@ -1,0 +1,1 @@
+CREATE TABLE emprunts (id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, livre_id INTEGER NOT NULL REFERENCES livres(id), membre_id INTEGER NOT NULL REFERENCES membres(id), date_emprunt DATE NOT NULL DEFAULT CURRENT_DATE, date_retour DATE, CHECK (date_retour IS NULL OR date_retour >= date_emprunt));
