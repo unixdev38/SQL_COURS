@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS livres_categories, emprunts, livres, categories, membres, auteurs;
+CREATE TABLE auteurs (id INT AUTO_INCREMENT PRIMARY KEY, nom VARCHAR(100) NOT NULL, email VARCHAR(255) UNIQUE, cree_le DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE membres (id INT AUTO_INCREMENT PRIMARY KEY, nom VARCHAR(120) NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, actif BOOLEAN NOT NULL DEFAULT TRUE, inscrit_le DATE NOT NULL DEFAULT (CURRENT_DATE)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE livres (id INT AUTO_INCREMENT PRIMARY KEY, titre VARCHAR(200) NOT NULL, auteur_id INT NOT NULL, isbn VARCHAR(17) UNIQUE, annee SMALLINT CHECK (annee > 0), disponible BOOLEAN NOT NULL DEFAULT TRUE, FOREIGN KEY (auteur_id) REFERENCES auteurs(id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE categories (id INT AUTO_INCREMENT PRIMARY KEY, nom VARCHAR(80) UNIQUE NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE livres_categories (livre_id INT, categorie_id INT, PRIMARY KEY (livre_id, categorie_id), FOREIGN KEY (livre_id) REFERENCES livres(id) ON DELETE CASCADE, FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE emprunts (id INT AUTO_INCREMENT PRIMARY KEY, livre_id INT NOT NULL, membre_id INT NOT NULL, date_emprunt DATE NOT NULL DEFAULT (CURRENT_DATE), date_retour DATE, CHECK (date_retour IS NULL OR date_retour >= date_emprunt), FOREIGN KEY (livre_id) REFERENCES livres(id), FOREIGN KEY (membre_id) REFERENCES membres(id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE INDEX idx_livres_auteur ON livres(auteur_id);
+CREATE INDEX idx_emprunts_membre_date ON emprunts(membre_id, date_emprunt);
+CREATE INDEX idx_emprunts_retour ON emprunts(date_retour);

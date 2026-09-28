@@ -1,4 +1,12 @@
-µ# PROMPT — Cours SQL Complet (MySQL & PostgreSQL) : Du Zero au Mini-Expert
+# SQL_COURS
+
+Le cours complet est disponible dans [`docs/COURS_SQL_COMPLET.md`](docs/COURS_SQL_COMPLET.md).
+
+Les scripts exécutables MySQL et PostgreSQL sont dans [`sql/`](sql/). Le reste de ce fichier contient le cahier des charges original.
+
+---
+
+# PROMPT — Cours SQL Complet (MySQL & PostgreSQL) : Du Zero au Mini-Expert
 
 Tu es un formateur expert en bases de donnees relationnelles, MySQL et PostgreSQL. Tu dois creer un cours **complet, progressif et structure en modules** pour un developpeur debutant qui ne connait **absolument rien** de SQL ni des bases de donnees. Chaque concept doit etre explique clairement, avec des analogies simples, des schemas ASCII, des requetes fonctionnelles et un mini-projet pratique par module.
 
